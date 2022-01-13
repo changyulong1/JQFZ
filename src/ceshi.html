@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>JS Bin</title>
+    <style>
+        .red {
+            background: red;
+            border: 1px solid black;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="test">
+        <div class="child">1</div>
+        <div class="child">2</div>
+        <div class="child">3</div>
+    </div>
+    <script>
+        // window.jQuery = function (selectorOrArray) {
+        //     let elements
+        //     if (typeof selectorOrArray === 'string') {
+        //         elements = document.querySelectorAll(selectorOrArray)
+        //     } else if (selectorOrArray instanceof Array) {
+        //         elements = selectorOrArray
+        //     }
+        //     return {
+        //         colApi: selectorOrArray.colApi,
+        //         addClass(className) {
+        //             console.log(elements)
+        //             for (let i = 0; i < elements.length; i++) {
+        //                 const element = elements[i]
+        //                 element.classList.add(className)
+        //             }
+        //             return this
+        //         },
+        //         find(selector) {
+        //             let array = []
+        //             for (let i = 0; i < elements.length; i++) {
+        //                 const elements2 = Array.from(elements[i].querySelectorAll(selector))
+        //                 array = array.concat(elements2)
+
+        //             }
+        //             array, colApi = this
+        //             return jQuery(array)
+        //         }
+        //     }
+        // }
+
+        // window.$ = window.jQuery
+
+        // $('#test').find('.child').addClass('red') // 请确保这句话成功执行
+        window.jQuery = function (selectorOrArray) {
+            let elements
+            if (typeof selectorOrArray === 'string') {
+                elements = document.querySelectorAll(selectorOrArray)
+            } else if (selectorOrArray instanceof Array) {
+                elements = selectorOrArray
+            }
+            return {
+                colApi: selectorOrArray.colApi,
+                addClass(className) {
+                    for (let i = 0; i < elements.length; i++) {
+                        elements[i].classList.add(className)
+                    }
+                    return this
+                },
+                find(selector) {
+                    let array = []
+                    for (let i = 0; i < elements.length; i++) {
+                        const element = Array.from(elements[i].querySelectorAll(selector))
+                        array = array.concat(element)
+                    }
+                    array, colApi = this
+                    return jQuery(array)
+                }
+            }
+        }
+        console.log(666)
+        console.log(555)
+
+        window.$ = window.jQuery
+
+        $('#test').find('.child').addClass('red') // 请确保这句话成功执行
+    </script>
+</body>
+
+</html>
